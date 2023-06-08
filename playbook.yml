@@ -1,0 +1,19 @@
+---
+- name: Provision VMs
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Create a test directory directory
+    file:
+      path: /test
+      state: directory
+  - debug:
+      var: machine_name
+  - name: Create a test file
+    copy:
+      dest: "/test/file.txt"
+      content: |
+        line 01
+        line 02
+        {{ machine_name }}
